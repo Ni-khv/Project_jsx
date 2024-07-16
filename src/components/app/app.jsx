@@ -6,6 +6,16 @@ import AppAdd from '../employees-add-form/employees-add-form';
 import './app.css';
 
 function App() {
+
+    const data =[
+      {name: 'Ивашенюта Н.' , salary:30000, increase: false },
+      {name: 'Полова В.' , salary:30000, increase: true },
+      {name: 'Ротару А.' , salary:30000 }
+    ];
+
+    
+
+
   return (
     <div className="app">
         <AppInfo/>
@@ -13,7 +23,7 @@ function App() {
             <AppSearch/>
             <AppFilter/>
         </div>
-        <AppList/>
+        <AppList data={data}/>
         <AppAdd/>
       
         
