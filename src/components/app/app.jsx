@@ -13,8 +13,8 @@ class App extends Component {
     super(props);
     this.state = {
        data: [
-        {name: 'Ивашенюта Н.' , salary:30000,increase: false, like: true, id:1},
-        {name: 'Полова В.' , salary:30000,increase: true, like: false, id:2},
+        {name: 'Ивашенюта Н.' , salary:30000,increase: false, like: false, id:1},
+        {name: 'Полова В.' , salary:30000,increase: false, like: false, id:2},
         {name: 'Ротару А.' , salary:30000,increase: false, like: false, id:3}
       ]
     }
@@ -50,21 +50,39 @@ class App extends Component {
 
 
     onToggleIncrease =(id) =>  {
-      this.setState(({data}) => {
-        const index = data.findIndex(elem => elem.id === id);
+      // this.setState(({data}) => {
+      //   const index = data.findIndex(elem => elem.id === id);
 
-        const old = data[index];
-        const newItem = {...old, increase : !old.increase};
-        const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+      //   const old = data[index];
+      //   const newItem = {...old, increase : !old.increase};
+      //   const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
 
-        return{
-          data: newArr
-        }
-      })
+      //   return{
+      //     data: newArr
+      //   }
+      // })
+
+      this.setState(({data}) => ({
+        data: data.map(item => { 
+          if (item.id === id){
+            return{...item, increase: !item.increase}
+          }
+          return item;
+        })
+      }))
+
+
   }
 
     onToggleLike =(id) =>  {
-        console.log(`Like this ${id}`);
+      this.setState(({data}) => ({
+        data: data.map(item => { 
+          if (item.id === id){
+            return{...item, like: !item.like}
+          }
+          return item;
+        })
+      }))
     }
 
     
@@ -72,9 +90,11 @@ class App extends Component {
 
 
     render() {
+      const employees = this.state.data.length;
+      const increased = this.state.data.filter(item => item.increase).length;
       return (
         <div className="app">
-            <AppInfo/>
+            <AppInfo employees = {employees} increased = {increased}/>
             <div className="search-panel">
                 <AppSearch/>
                 <AppFilter/>
