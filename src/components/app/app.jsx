@@ -18,7 +18,7 @@ class App extends Component {
         {name: 'Ротару А.' , salary:30000,increase: false, like: false, id:3}
       ],
 
-      term: 'S'
+      term: 'И'
     }
     this.maxId = 4;
   }
@@ -92,7 +92,7 @@ class App extends Component {
       if (term.length === 0) {
         return items;
       }
-      return items.filter (items => {
+      return items.filter (item => {
         return item.name.indexOf(term) > -1
       })
     }
