@@ -18,7 +18,7 @@ class App extends Component {
         {name: 'Ротару А.' , salary:30000,increase: false, like: false, id:3}
       ],
 
-      term: 'И'
+      term: ''
     }
     this.maxId = 4;
   }
@@ -97,6 +97,9 @@ class App extends Component {
       })
     }
 
+    onUpdateSearch = (term) => {
+      this.setState({term});
+    }
 
     render() {
       const {data, term} = this.state;
@@ -107,7 +110,7 @@ class App extends Component {
         <div className="app">
             <AppInfo employees = {employees} increased = {increased}/>
             <div className="search-panel">
-                <AppSearch/>
+                <AppSearch onUpdateSearch = {this.onUpdateSearch}/>
                 <AppFilter/>
             </div>
             <AppList 
